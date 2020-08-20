@@ -1,8 +1,0 @@
-﻿  Checking Build System
-  CMake is re-running because D:/dev/bsv/bench/build/CMakeFiles/generate.stamp is out-of-date.
-    the file 'D:/dev/bsv/bench/CMakeLists.txt'
-    is newer than 'D:/dev/bsv/bench/build/CMakeFiles/generate.stamp.depend'
-    result='-1'
-  -- Configuring done
-  -- Generating done
-  -- Build files have been written to: D:/dev/bsv/bench/build

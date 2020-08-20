@@ -1,0 +1,4 @@
+﻿  benchmain.c
+D:\dev\bsv\include\bsv\bsv_V4f.h(132,45): warning C4244: 'function': conversion from 'double' to 'const float', possible loss of data
+D:\dev\bsv\include\bsv\bsv_V4f.h(134,45): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  bsv_bench.vcxproj -> D:\dev\bsv\bench\build\Release\bsv_bench.exe

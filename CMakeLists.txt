@@ -17,12 +17,9 @@ if (${CMAKE_C_COMPILER_ID} STREQUAL "GNU")
     link_libraries(bsvv m)   # Maths std library.
 endif()
 
-find_package(bsv CONFIG REQUIRED)
-target_link_libraries(bsvv PUBLIC bsv)
-target_include_directories(cvortex PUBLIC bsv)
 find_package(SIMDE CONFIG REQUIRED)
-target_link_libraries(bsvv PUBLIC bsv)
-target_include_directories(bsvv PUBLIC bsv)
+target_link_libraries(bsvv PUBLIC SIMDE)
+target_include_directories(bsvv PUBLIC SIMDE)
 
 include(GNUInstallDirs)
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

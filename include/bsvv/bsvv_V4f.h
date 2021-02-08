@@ -5,7 +5,7 @@ bsvv_V4f.h
 
 Vec4 single precision vectors.
 
-Copyright(c) 2018-2019 HJA Bird
+Copyright(c) 2018-2021 HJA Bird
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files(the "Software"), to deal
@@ -48,13 +48,13 @@ bsvv_Sf bsvv_V4f_abs(const bsvv_V4f self)
 {
 	simde__m512d a, b, c, d, e;
 	bsvv_Sd f;
-	a = simde_mm512_mul_pd(self.x[0], other.x[0]);
-	b = simde_mm512_mul_pd(self.x[1], other.x[1]);
-	c = simde_mm512_mul_pd(self.x[2], other.x[2]);
-	d = simde_mm512_mul_pd(self.x[3], other.x[3]);
+	a = simde_mm512_mul_pd(self.vec[0], other.vec[0]);
+	b = simde_mm512_mul_pd(self.vec[1], other.vec[1]);
+	c = simde_mm512_mul_pd(self.vec[2], other.vec[2]);
+	d = simde_mm512_mul_pd(self.vec[3], other.vec[3]);
 	e = simde_mm512_add_ps(
 		simde_mm512_add_ps(simde_mm512_add_ps(a, b), c), d);
-	f.x = simde_mm512_sqrt_pd(e);
+	f.vec = simde_mm512_sqrt_pd(e);
 	return d;
 }
 
@@ -62,11 +62,11 @@ bsvv_Sf bsvv_V4f_dot(const bsvv_V4f self, const bsvv_V4f other)
 {
 	simde__m512d a, b, c, d;
 	bsvv_Sf e;
-	a = simde_mm512_mul_ps(self.x[0], other.x[0]);
-	b = simde_mm512_mul_ps(self.x[1], other.x[1]);
-	c = simde_mm512_mul_ps(self.x[2], other.x[2]);
-	d = simde_mm512_mul_ps(self.x[3], other.x[3]);
-	e.x = simde_mm512_add_ps(
+	a = simde_mm512_mul_ps(self.vec[0], other.vec[0]);
+	b = simde_mm512_mul_ps(self.vec[1], other.vec[1]);
+	c = simde_mm512_mul_ps(self.vec[2], other.vec[2]);
+	d = simde_mm512_mul_ps(self.vec[3], other.vec[3]);
+	e.vec = simde_mm512_add_ps(
 		simde_mm512_add_ps(simde_mm512_add_ps(a, b), c), d);
 	return e;
 }
@@ -74,30 +74,30 @@ bsvv_Sf bsvv_V4f_dot(const bsvv_V4f self, const bsvv_V4f other)
 bsvv_V4f bsvv_V4f_zero(void)
 {
 	bsvv_V4f ret;
-	ret.x[0] = simde_mm512_setzero_ps();
-	ret.x[1] = simde_mm512_setzero_ps();
-	ret.x[2] = simde_mm512_setzero_ps();
-	ret.x[3] = simde_mm512_setzero_ps();
+	ret.vec[0] = simde_mm512_setzero_ps();
+	ret.vec[1] = simde_mm512_setzero_ps();
+	ret.vec[2] = simde_mm512_setzero_ps();
+	ret.vec[3] = simde_mm512_setzero_ps();
 	return ret;
 }
 
 bsvv_V4f bsvv_V4f_plus(const bsvv_V4f self, const bsvv_V4f other)
 {
 	bsvv_V4f ret;
-	ret.x[0] = simde_m512_add_ps(self.x[0], other.x[0]);
-	ret.x[1] = simde_m512_add_ps(self.x[1], other.x[1]);
-	ret.x[2] = simde_m512_add_ps(self.x[2], other.x[2]);
-	ret.x[3] = simde_m512_add_ps(self.x[3], other.x[3]);
+	ret.vec[0] = simde_m512_add_ps(self.vec[0], other.vec[0]);
+	ret.vec[1] = simde_m512_add_ps(self.vec[1], other.vec[1]);
+	ret.vec[2] = simde_m512_add_ps(self.vec[2], other.vec[2]);
+	ret.vec[3] = simde_m512_add_ps(self.vec[3], other.vec[3]);
 	return ret;
 }
 
 bsvv_V4f bsvv_V4f_minus(const bsvv_V4f self, const bsvv_V4f other)
 {
 	bsvv_V4f ret;
-	ret.x[0] = simde_m512_sub_ps(self.x[0], other.x[0]);
-	ret.x[1] = simde_m512_sub_ps(self.x[1], other.x[1]);
-	ret.x[2] = simde_m512_sub_ps(self.x[2], other.x[2]);
-	ret.x[3] = simde_m512_sub_ps(self.x[3], other.x[3]);
+	ret.vec[0] = simde_m512_sub_ps(self.vec[0], other.vec[0]);
+	ret.vec[1] = simde_m512_sub_ps(self.vec[1], other.vec[1]);
+	ret.vec[2] = simde_m512_sub_ps(self.vec[2], other.vec[2]);
+	ret.vec[3] = simde_m512_sub_ps(self.vec[3], other.vec[3]);
 	return ret;
 }
 
@@ -106,30 +106,30 @@ bsvv_V4f bsvv_V4f_uminus(const bsvv_V4f self)
 	bsvv_V4f ret;
 	simde__m512 m1;
 	m1 = simde_m512_set1_ps(-1.0f);
-	ret.x[0] = simde_m512_mul_ps(self.x[0], m1);
-	ret.x[1] = simde_m512_mul_ps(self.x[1], m1);
-	ret.x[2] = simde_m512_mul_ps(self.x[2], m1);
-	ret.x[3] = simde_m512_mul_ps(self.x[3], m1);
+	ret.vec[0] = simde_m512_mul_ps(self.vec[0], m1);
+	ret.vec[1] = simde_m512_mul_ps(self.vec[1], m1);
+	ret.vec[2] = simde_m512_mul_ps(self.vec[2], m1);
+	ret.vec[3] = simde_m512_mul_ps(self.vec[3], m1);
 	return ret;
 }
 
 bsvv_V4f bsvv_V4f_mult(const bsvv_V4f self, const bsvv_Sf multiplier)
 {
 	bsvv_V4f ret;
-	ret.x[0] = simde_m512_mul_ps(self.x[0], multiplier.x);
-	ret.x[1] = simde_m512_mul_ps(self.x[1], multiplier.x);
-	ret.x[2] = simde_m512_mul_ps(self.x[2], multiplier.x);
-	ret.x[3] = simde_m512_mul_ps(self.x[3], multiplier.x);
+	ret.vec[0] = simde_m512_mul_ps(self.vec[0], multiplier.vec);
+	ret.vec[1] = simde_m512_mul_ps(self.vec[1], multiplier.vec);
+	ret.vec[2] = simde_m512_mul_ps(self.vec[2], multiplier.vec);
+	ret.vec[3] = simde_m512_mul_ps(self.vec[3], multiplier.vec);
 	return ret;
 }
 
 bsvv_V4f bsvv_V4f_div(const bsvv_V4f self, const bsvv_Sf div)
 {
 	bsvv_V4f ret;
-	ret.x[0] = simde_m512_div_ps(self.x[0], div.x);
-	ret.x[1] = simde_m512_div_ps(self.x[1], div.x);
-	ret.x[2] = simde_m512_div_ps(self.x[2], div.x);
-	ret.x[4] = simde_m512_div_ps(self.x[4], div.x);
+	ret.vec[0] = simde_m512_div_ps(self.vec[0], div.vec);
+	ret.vec[1] = simde_m512_div_ps(self.vec[1], div.vec);
+	ret.vec[2] = simde_m512_div_ps(self.vec[2], div.vec);
+	ret.vec[4] = simde_m512_div_ps(self.vec[4], div.vec);
 	return ret;
 }
 
@@ -138,7 +138,7 @@ bsvv_V4f bsvv_V4f_unit(const bsvv_V4f self)
 	bsvv_V4f ret;
 	bsvv_Sf len;
 	len = bsvv_V4f_abs(self);
-	ret.x = bsvv_V4f_div(self, len);	
+	ret.vec = bsvv_V4f_div(self, len);	
 	return ret;
 }
 
@@ -147,11 +147,11 @@ int bsvv_V4f_isequal(const bsvv_V4f self, const bsvv_V4f other)
 	bsvv_Bd retv;
 	simde_mmask16 r0, r1, r2, r3;
 	/* 0 indicates _CMP_EQ_OQ (equal, ordered, non-signalling) */
-	r0 = simde_m512_cmp_ps_mask(self.x[0], other.x[0], 0); 
-	r1 = simde_m512_cmp_ps_mask(self.x[1], other.x[1], 0); 
-	r2 = simde_m512_cmp_ps_mask(self.x[2], other.x[2], 0); 
-	r3 = simde_m512_cmp_ps_mask(self.x[3], other.x[3], 0); 
-	retv.x = simde_mm512_kand(
+	r0 = simde_m512_cmp_ps_mask(self.vec[0], other.vec[0], 0); 
+	r1 = simde_m512_cmp_ps_mask(self.vec[1], other.vec[1], 0); 
+	r2 = simde_m512_cmp_ps_mask(self.vec[2], other.vec[2], 0); 
+	r3 = simde_m512_cmp_ps_mask(self.vec[3], other.vec[3], 0); 
+	retv.vec = simde_mm512_kand(
 		simde_mm512_kand(simde_mm512_kand(r0, r1), r2), r3);
 	return retv;
 }
@@ -159,8 +159,8 @@ int bsvv_V4f_isequal(const bsvv_V4f self, const bsvv_V4f other)
 int bsvv_V4f_isnequal(const bsvv_V4f self, const bsvv_V4f other)
 {
 	bsvv_Bd retv = bsvv_V2f_isequal(self, other);
-	retv.x = simde_mm512_knot(retv);
-	return retv.x;
+	retv.vec = simde_mm512_knot(retv);
+	return retv.vec;
 }
 
 bsvv_V4d bsvv_V4f_toV4d(const bsvv_V4f input)
@@ -169,10 +169,10 @@ bsvv_V4d bsvv_V4f_toV4d(const bsvv_V4f input)
 	simde_m512 ox0, ox1, xo2, xo3
 	simde_m256 x0, x1, x2, x3;
 	simde_m512i idxs;
-	ox0 = input.x[0];
-	ox1 = input.x[1];
-	ox2 = input.x[2];
-	ox2 = input.x[3];
+	ox0 = input.vec[0];
+	ox1 = input.vec[1];
+	ox2 = input.vec[2];
+	ox2 = input.vec[3];
 	if(lower_upper != 0){
 		/* I'm new to AVX512, if you can't tell */
 		idxs = simde_mm512_set_epi32(
@@ -187,10 +187,10 @@ bsvv_V4d bsvv_V4f_toV4d(const bsvv_V4f input)
 	x1 = simde_mm512_castps512_ps256(ox1);
 	x2 = simde_mm512_castps512_ps256(ox2);
 	x3 = simde_mm512_castps512_ps256(ox3);
-	ret.x[0] = simde_mm512_cvtps_pd(x0);
-	ret.x[1] = simde_mm512_cvtps_pd(x1);
-	ret.x[2] = simde_mm512_cvtps_pd(x2);
-	ret.x[3] = simde_mm512_cvtps_pd(x3);
+	ret.vec[0] = simde_mm512_cvtps_pd(x0);
+	ret.vec[1] = simde_mm512_cvtps_pd(x1);
+	ret.vec[2] = simde_mm512_cvtps_pd(x2);
+	ret.vec[3] = simde_mm512_cvtps_pd(x3);
 	return ret;
 }
 

@@ -5,7 +5,7 @@ bsvv_types.h
 
 Structure definitions for small vectors / matrices library (vectorised).
 
-Copyright(c) 2018-2020 HJA Bird
+Copyright(c) 2018-2021 HJA Bird
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files(the "Software"), to deal
@@ -25,76 +25,92 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ============================================================================*/
-#include <x86/avx512f.h>	/* simde library */
+#include <simde/x86/avx512.h> /* simde library */
 
 /* Scalar arrays -------*/
-typedef struct bsvv_Sd{
-	simde__m512d x;
-} bsvv_Sd;
-
-typedef struct bsvv_Sf{
-	simde__m512f x;
+typedef union bsvv_Sf{
+	simde__m512 vec;
+	float a[16];
 } bsvv_Sf;
+
+typedef union bsvv_Sd{
+	simde__m512d vec;
+	double a[8];
+} bsvv_Sd;
 
 /* Bool arrays ---------*/
-typedef struct bsvv_Bd{
-	simde__mmask8 x;
-} bsvv_Sd;
+typedef union bsvv_Bd{
+	simde__mmask8 vec;
+	unsigned int a;
+} bsvv_Bd;
 
-typedef struct bsvv_Bf{
-	simde__mmask16 x;
-} bsvv_Sf;
+typedef union bsvv_Bf{
+	simde__mmask16 vec;
+	unsigned int a;
+} bsvv_Bf;
 
 /* Vectors -------------*/
 
-typedef struct bsvv_V4f {
-	simde__m512f x[4];
+typedef union bsvv_V4f {
+	simde__m512 vec[4];
+	float a[4][16];
 } bsvv_V4f;
 
-typedef struct bsvv_V4d {
-	simde__m512d x[4];
+typedef union bsvv_V4d {
+	simde__m512d vec[4];
+	double a[4][8];
 } bsvv_V4d;
 
-typedef struct bsvv_V3f {
-	simde__m512f x[3];
+typedef union bsvv_V3f {
+	simde__m512 vec[3];
+	float a[4][16];
 } bsvv_V3f;
 
-typedef struct bsvv_V3d {
-	simde__m512d x[3];
+typedef union bsvv_V3d {
+	simde__m512d vec[3];
+	double a[3][8];
 } bsvv_V3d;
 
-typedef struct bsvv_V2f {
-	simde__m512f x[2];
+typedef union bsvv_V2f {
+	simde__m512 vec[2];
+	float a[2][16];
 } bsvv_V2f;
 
-typedef struct bsvv_V2d {
-	simde__m512d x[2];
+typedef union bsvv_V2d {
+	simde__m512d vec[2];
+	double a[2][8];
 } bsvv_V2d;
 
 /* Matrices ------------*/
 
-typedef struct bsvv_M4f {
-	simde__m512f x[4][4];
+typedef union bsvv_M4f {
+	simde__m512 vec[4][4];
+	float a[4][4][16];
 } bsvv_M4f;
 
-typedef struct bsvv_M4d {
-	simde__m512d x[4][4];
+typedef union bsvv_M4d {
+	simde__m512d vec[4][4];
+	double a[4][4][8];
 } bsvv_M4d;
 
-typedef struct bsvv_M3f {
-	simde__m512f x[3][3];
+typedef union bsvv_M3f {
+	simde__m512 vec[3][3];
+	float a[3][3][16];
 } bsvv_M3f;
 
-typedef struct bsvv_M3d {
-	simde__m512d x[3][3];
+typedef union bsvv_M3d {
+	simde__m512d vec[3][3];
+	double a[3][3][8];
 } bsvv_M3d;
 
-typedef struct bsvv_M2f {
-	simde__m512f x[2][2];
+typedef union bsvv_M2f {
+	simde__m512 vec[2][2];
+	float a[2][2][16];
 } bsvv_M2f;
 
-typedef struct bsvv_M2d {
-	simde__m512d x[2][2];
+typedef union bsvv_M2d {
+	simde__m512d vec[2][2];
+	double a[2][2][8];
 } bsvv_M2d;
 
 #endif
